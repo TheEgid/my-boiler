@@ -51,12 +51,11 @@
         "typescript": "4.9.4"
     },
     "scripts": {
+        "fmt_front": "eslint --cache --ext .js,.jsx,.ts,.tsx ./src --fix & yarn lint_css",
         "start_frontend": "set PORT=3006&& react-scripts start",
-        "start": "fmt_front && lint:css && set PORT=3006&& react-scripts start",
-        "fmt_front": "eslint --cache --ext .js,.jsx,.ts,.tsx src --fix",
         "build": "react-scripts build",
         "test": "react-scripts test",
-        "lint:css": "stylelint --cache --fix ./src/index.scss"
+        "lint_css": "stylelint --cache --fix ./src/index.scss"
     },
     "stylelint": {
         "extends": [
