@@ -1,5 +1,5 @@
 export enum DogActionTypes {
-    FETCH_DOG = "FETCH_DOG",
+    FETCH_DOG_START = "FETCH_DOG_START",
 }
 
 export interface IDogState {

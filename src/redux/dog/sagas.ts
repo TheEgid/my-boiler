@@ -1,19 +1,20 @@
 import { call, put, takeLatest } from "typed-redux-saga";
-import { fetchDog, requestDogError, requestDogSuccess } from "./reducers";
-import { getDogData } from "./APIServices";
+import { dogLoading, dogFetch, dogError } from "./slices";
+import { getDogDataFromApi } from "./ApiServices";
 import { DogActionTypes } from "./types";
 
-export function* fetchDogSaga() {
+function* fetchDogSaga() {
     try {
-        yield* put(fetchDog());
-        const response = yield* call(getDogData);
+        yield* put(dogLoading());
 
-        yield* put(requestDogSuccess(response));
+        const response = yield* call(getDogDataFromApi);
+
+        yield* put(dogFetch(response));
     } catch (error) {
-        yield* put(requestDogError());
+        yield* put(dogError());
     }
 }
 
 export function* watchFetchDog() {
-    yield* takeLatest(DogActionTypes.FETCH_DOG, fetchDogSaga);
+    yield* takeLatest(DogActionTypes.FETCH_DOG_START, fetchDogSaga);
 }
