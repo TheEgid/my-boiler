@@ -123,7 +123,6 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
 lib64/
 parts/
 sdist/
@@ -136,8 +135,6 @@ share/python-wheels/
 *.egg
 MANIFEST
 
-/backend/UPLOAD/*
-!/backend/UPLOAD/.gitkeep
 
 /_BACKUP/*
 !/_BACKUP/.gitkeep
@@ -146,15 +143,15 @@ MANIFEST
 
 .stylelintcache
 
-.swc
+/backup.7z
+/test-results/
+/playwright-report/
+/playwright/.cache/
 
 /animals/build
-/animals/node_modules
-/animals/public/files/*
-/animals/e2e/temp.txt
-/animals/e2e/temp.tmp
-/animals/public/sitemap-0.xml
-/animals/public/sitemap.xml
-/animals/public/robots.txt
+/animals/public/
 
-/animals/next-env.d.ts
+!/animals/public/favicon*
+
+!/animals/public/baza/*
+!/animals/public/temporary/.gitkeep

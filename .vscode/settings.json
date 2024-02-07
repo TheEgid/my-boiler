@@ -1,8 +1,5 @@
 {
-    "eslint.workingDirectories": [
-        "frontend",
-        "backend"
-    ],
-    "eslint.packageManager": "yarn",
-    "npm.packageManager": "yarn",
+  "npm.packageManager": "pnpm",
+  "files.eol": "\n",
+  "eslint.workingDirectories": ["animals"]
 }
