@@ -1,0 +1,96 @@
+{
+    "$schema": "http://json.schemastore.org/eslintrc",
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "jest": true
+    },
+    "globals": {
+        "__dirname": true
+    },
+    "root": true,
+    "extends": [
+        "eslint:recommended",
+        "plugin:sonarjs/recommended",
+        "airbnb-typescript/base",
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking",
+        "prettier",
+        "next",
+        "plugin:import/recommended",
+        "plugin:import/typescript"
+    ],
+    "settings": {
+        "import/resolver": {
+            "typescript": true,
+            "node": true
+        },
+        "react": {
+            "version": "18.2.0"
+        }
+    },
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 2020,
+        "sourceType": "module",
+        "project": "tsconfig.json",
+        "tsconfigRootDir": "."
+    },
+    "plugins": ["@typescript-eslint", "import", "prettier", "react", "sonarjs", "testing-library"],
+    "rules": {
+        "padding-line-between-statements": ["error", { "blankLine": "always", "prev": "*", "next": "return" }],
+        "eqeqeq": "error",
+        "arrow-body-style": ["error", "as-needed"],
+        "import/first": "error",
+        "import/named": "off",
+        "import/newline-after-import": "error",
+        "import/order": [
+            "error",
+            {
+                "groups": [["builtin", "external"], "internal", "parent", ["sibling", "index"], "object", "type"],
+                "pathGroups": [
+                    {
+                        "pattern": "react",
+                        "group": "external",
+                        "position": "before"
+                    }
+                ],
+                "pathGroupsExcludedImportTypes": ["react"],
+                "newlines-between": "never",
+                "alphabetize": {
+                    "order": "asc",
+                    "caseInsensitive": true
+                }
+            }
+        ],
+        "@typescript-eslint/no-misused-promises": [
+            "error",
+            {
+                "checksVoidReturn": false
+            }
+        ],
+        "@typescript-eslint/no-unused-vars": "warn",
+        "@typescript-eslint/no-unsafe-call": "off",
+        "@typescript-eslint/no-unsafe-return": "off",
+        "@typescript-eslint/no-unsafe-argument": "off",
+        "@typescript-eslint/no-unsafe-assignment": "off",
+        "@typescript-eslint/no-unsafe-member-access": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-redundant-type-constituents": "off",
+        "testing-library/prefer-screen-queries": "off",
+        "no-console": "off",
+        "prettier/prettier": [
+            "warn",
+            {
+                "printWidth": 140,
+                "tabWidth": 4,
+                "bracketSpacing": true,
+                "bracketSameLine": true,
+                "semi": true,
+                "singleQuote": false,
+                "trailingComma": "es5"
+            }
+        ]
+    }
+}

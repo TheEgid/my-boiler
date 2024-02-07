@@ -14,7 +14,7 @@ export default function Home() {
             </Head>
             <Container>
                 <div className="hello">
-                    <div className="chil">Привет от зверей</div>
+                    <div className="chil">Привет от птиц</div>
 
                     <Button variant="secondary" onClick={(e) => e}>
                         Нажми меня
