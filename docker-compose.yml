@@ -5,7 +5,7 @@ services:
     build:
       context: animals
       dockerfile: Dockerfile
-    container_name: animals_container
+    container_name: app2
     ports:
       - "127.0.0.1:3008:3008"
     # depends_on:
@@ -27,7 +27,7 @@ services:
     build:
       context: birds
       dockerfile: Dockerfile
-    container_name: birds_container
+    container_name: app1
     ports:
       - "127.0.0.1:3007:3007"
     restart: on-failure
