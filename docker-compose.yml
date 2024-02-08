@@ -13,12 +13,12 @@ services:
     restart: on-failure
     environment:
       TZ: "Europe/Moscow"
-    healthcheck:
-      test: ["CMD", "curl", "127.0.0.1:3008/api/healthcheck"]
-      interval: 5s
-      timeout: 3s
-      retries: 2
-      start_period: 5s
+    # healthcheck:
+    #   test: ["CMD", "curl", "127.0.0.1:3008/api/healthcheck"]
+    #   interval: 5s
+    #   timeout: 3s
+    #   retries: 2
+    #   start_period: 5s
     # volumes:
     #   - ./animals/prisma:/app/prisma
     #   - ./../database:/app/data/database.db
