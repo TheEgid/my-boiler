@@ -1,5 +1,5 @@
 {
   "npm.packageManager": "pnpm",
   "files.eol": "\n",
-  "eslint.workingDirectories": ["animals"]
+  "eslint.workingDirectories": ["animals", "birds"]
 }
