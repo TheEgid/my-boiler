@@ -1,25 +1,18 @@
 import { createStore, createEffect } from "effector";
+import { apiRoot } from "src/api";
 
 export const fetchTasks = createEffect(async () => {
-    const response = await fetch("/api/tasks");
+    const response = await fetch("api/task");
 
     return response.json();
 });
 
 export const $tasks = createStore([]).on(fetchTasks.done, (_, { result }) => result);
 
-// eslint-disable-next-line @typescript-eslint/require-await
-export const addTask = createEffect(async (title: string) => {
-    console.log(title);
-    // const response = await fetch("/api/tasks", {
-    //     method: "POST",
-    //     headers: {
-    //         "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({ title, completed: false }),
-    // });
+export const addTaskFx = createEffect(async (params: { title: string }) => {
+    const response = await apiRoot.post("task", { json: { title: params.title } });
 
-    // return response.json();
+    return response.json();
 });
 
 // export const updateTask = createEffect(async ({ id, title, completed }) => {

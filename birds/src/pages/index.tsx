@@ -3,7 +3,7 @@ import { useUnit } from "effector-react";
 import Head from "next/head";
 import { Container } from "react-bootstrap";
 import { ToastContainer } from "react-toastify";
-import { $tasks, addTask, fetchTasks } from "src/model/store";
+import { $tasks, addTaskFx, fetchTasks } from "src/model/store";
 
 import "react-toastify/dist/ReactToastify.css"; // import first
 
@@ -15,8 +15,7 @@ export default function Home() {
     }, []);
 
     const handleAddTask = async (title: string) => {
-        console.log(title);
-        await addTask(title);
+        await addTaskFx({ title });
         void fetchTasks();
     };
 

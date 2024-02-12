@@ -4,5 +4,5 @@ export default {
     reactStrictMode: true,
     distDir: "build",
     onDemandEntries: { maxInactiveAge: 25 * 10000 },
-    assetPrefix: process.platform === "linux" ? "/app1" : '',
+    assetPrefix: process.platform === "linux" ? "/app1" : "",
 };

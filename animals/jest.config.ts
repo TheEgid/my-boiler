@@ -7,7 +7,7 @@ const config: Config = {
     verbose: true,
     transform: {
         "^.+\\.(t|j)sx?$": "@swc/jest",
-        ".+\\.(css|styl|less|sass|scss|xml)$": "jest-css-modules-transform",
+        // ".+\\.(css|styl|less|sass|scss|xml)$": "jest-css-modules-transform",
     },
     rootDir: ".",
     modulePaths: ["<rootDir>"],

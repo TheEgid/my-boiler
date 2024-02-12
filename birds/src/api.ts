@@ -12,7 +12,7 @@ export const apiRoot: KyInstance = ky.create({
     },
     retry: {
         limit: 3,
-        methods: ["get", "post", "patch"],
+        methods: ["get", "post", "patch", "put"],
         statusCodes: [403],
         backoffLimit: 3000,
     },
