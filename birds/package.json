@@ -16,7 +16,7 @@
         "prisma_gen_dev": "pnpm prisma generate --schema=./prisma/sqlite.prisma",
         "prisma_push_dev": "pnpm prisma db push --schema=./prisma/sqlite.prisma",
         "prisma_studio_dev": "pnpm prisma studio --schema=./prisma/sqlite.prisma",
-        "backup_dev": "cd ./technical/&&tsc createSQLiteDump.ts&&node createSQLiteDump.js"
+        "backup_dev": "cd ./technical/&&tsc createSQLiteBackup.ts&&node createSQLiteBackup.js"
     },
     "dependencies": {
         "@prisma/client": "^5.9.1",
