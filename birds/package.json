@@ -13,9 +13,10 @@
         "frmt": "eslint --cache --ext .js,.jsx,.ts,.tsx ./src --fix",
         "test": "jest",
         "e2e_test": "pnpm playwright test",
-        "prisma_gen_dev": "pnpm prisma generate",
-        "prisma_push": "pnpm prisma db push",
-        "prisma_studio": "pnpm prisma studio"
+        "prisma_gen_dev": "pnpm prisma generate --schema=./prisma/sqlite.prisma",
+        "prisma_push_dev": "pnpm prisma db push --schema=./prisma/sqlite.prisma",
+        "prisma_studio_dev": "pnpm prisma studio --schema=./prisma/sqlite.prisma",
+        "backup_dev": "cd ./technical/&&tsc createSQLiteDump.ts&&node createSQLiteDump.js"
     },
     "dependencies": {
         "@prisma/client": "^5.9.1",
@@ -37,6 +38,7 @@
         "react-toastify": "^10.0.4",
         "sass": "^1.70.0",
         "sass-loader": "^14.1.0",
+        "sqlite3": "^5.1.7",
         "ts-node": "^10.9.2"
     },
     "devDependencies": {

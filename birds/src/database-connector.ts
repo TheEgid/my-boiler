@@ -6,7 +6,8 @@ import { PrismaClient } from "@prisma/client";
 
 // // const databaseHost = process.platform === "win32" ? "localhost" : "full_db_postgres";
 
-const DATABASE_URL = process.env.DATABASE_URL; //`postgresql://${userDb}:${passwordDb}@${databaseHost}:5432/${nameDb}`;
+const DATABASE_URL = process.platform === "win32" ? process.env.DATABASE_URL_DEV : process.env.DATABASE_URL_PROD;
+//`postgresql://${userDb}:${passwordDb}@${databaseHost}:5432/${nameDb}`;
 
 const prismaClientSingleton = () =>
     new PrismaClient({

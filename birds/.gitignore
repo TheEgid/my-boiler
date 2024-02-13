@@ -141,6 +141,8 @@ MANIFEST
 
 *.rar
 
+createSQLiteDump.js
+
 .stylelintcache
 
 /backup.7z
