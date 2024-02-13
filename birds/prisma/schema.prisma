@@ -1,15 +1,10 @@
-// datasource db {
-//   provider = "sqlite"
-//   url      = "file:./mydatabase.db"
-// }
-
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
-
 generator client {
   provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
 }
 
 model Task {
@@ -17,56 +12,3 @@ model Task {
   title     String
   completed Boolean
 }
-
-// model user {
-//   id               String     @id @default(uuid())
-//   firstName        String?
-//   email            String     @unique
-//   password         String
-//   isEmailConfirmed Boolean    @default(false)
-//   role             userRole   @default(guest)
-//   created_at       DateTime   @default(now())
-//   updated_at       DateTime   @default(now())
-//   tokenVersion     Int        @default(0)
-//   images           image[]
-//   albums           album[]
-//   blogItem         blogItem[]
-// }
-
-// model album {
-//   id        Int      @id @default(autoincrement())
-//   albumName String
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @default(now())
-//   user      user     @relation(fields: [userId], references: [id])
-//   userId    String   @db.Uuid
-//   images    image[]
-// }
-
-// model image {
-//   id        Int     @id @default(autoincrement())
-//   imageName String
-//   legend    String
-//   schematic String?
-//   album     album   @relation(fields: [albumId], references: [id])
-//   albumId   Int
-//   user      user    @relation(fields: [userId], references: [id])
-//   userId    String  @db.Uuid
-// }
-
-// model blogItem {
-//   id          String   @id @default(uuid())
-//   userId      String   @db.Uuid
-//   user        user     @relation(fields: [userId], references: [id])
-//   createdAt   DateTime @default(now())
-//   updatedAt   DateTime @updatedAt
-//   imageA1Name String
-//   imageB1Name String
-//   imageB2Name String
-//   imageC1Name String
-//   imageC2Name String
-//   imageC3Name String
-//   noteHead    String?
-//   noteMain    String?
-//   noteBottom  String?
-// }

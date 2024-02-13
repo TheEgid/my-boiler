@@ -13,15 +13,15 @@
         "frmt": "eslint --cache --ext .js,.jsx,.ts,.tsx ./src --fix",
         "test": "jest",
         "e2e_test": "pnpm playwright test",
-        "prisma_gen_dev": "cross-env DATABASE_URL=postgresql://${NEXT_PUBLIC_DB_USER_DEV}:${NEXT_PUBLIC_DB_PASSWORD_DEV}@localhost:5432/${NEXT_PUBLIC_DB_NAME_DEV} pnpm prisma generate",
-        "prisma_push": "pnpm prisma db push"
+        "prisma_gen_dev": "pnpm prisma generate",
+        "prisma_push": "pnpm prisma db push",
+        "prisma_studio": "pnpm prisma studio"
     },
     "dependencies": {
         "@prisma/client": "^5.9.1",
         "@prisma/engines": "^5.9.1",
         "@types/graceful-fs": "^4.1.9",
         "bootstrap": "^5.3.2",
-        "cross-env": "^7.0.3",
         "effector": "^23.2.0",
         "effector-react": "^23.2.0",
         "graceful-fs": "^4.2.11",

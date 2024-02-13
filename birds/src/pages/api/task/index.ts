@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { prisma } from "src/db";
+import { prisma } from "src/database-connector";
 
 const getHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
