@@ -146,7 +146,7 @@ MANIFEST
 
 .stylelintcache
 
-.swc
+*.db
 
 /animals/build
 /animals/node_modules
