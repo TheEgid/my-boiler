@@ -4,23 +4,24 @@ import { PrismaClient } from "@prisma/client";
 // const passwordDb = process.env.NEXT_PUBLIC_DB_PASSWORD_DEV;
 // const nameDb = process.env.NEXT_PUBLIC_DB_NAME_DEV;
 
-// // const databaseHost = process.platform === "win32" ? "localhost" : "full_db_postgres";
+// const databaseHost = process.platform === "win32" ? "localhost" : "full_db_postgres";
 
-const DATABASE_URL = process.platform === "win32" ? process.env.DATABASE_URL_DEV : process.env.DATABASE_URL_PROD;
-//`postgresql://${userDb}:${passwordDb}@${databaseHost}:5432/${nameDb}`;
+const dbUrl = process.env.DATABASE_URL_DEV;
+// const dbUrl = process.platform === "win32" ? process.env.DATABASE_URL_DEV : process.env.DATABASE_URL_PROD;
+// `postgresql://${userDb}:${passwordDb}@${databaseHost}:5432/${nameDb}`;
 
-const prismaClientSingleton = () =>
+const prismaClientSingleton = (): PrismaClient =>
     new PrismaClient({
-        datasources: { db: { url: DATABASE_URL } },
+        datasources: { db: { url: dbUrl } },
         // log: ["query", "info",],
         log: ["warn", "error"],
     });
 
 declare global {
-    const prisma: undefined | ReturnType<typeof prismaClientSingleton>;
+    const prisma: undefined | PrismaClient;
 }
 
-const prisma = ((global as any)?.prisma as ReturnType<typeof prismaClientSingleton>) ?? prismaClientSingleton();
+const prisma = ((global as any)?.prisma as PrismaClient) ?? prismaClientSingleton();
 
 // if (process.env.NODE_ENV !== "production") {
 //     (global as any).prisma = prisma;

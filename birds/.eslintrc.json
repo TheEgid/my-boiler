@@ -11,6 +11,7 @@
     "root": true,
     "extends": [
         "eslint:recommended",
+        "eslint-config-standard-with-typescript",
         "plugin:sonarjs/recommended",
         "airbnb-typescript/base",
         "plugin:react/recommended",
@@ -70,6 +71,7 @@
                 "checksVoidReturn": false
             }
         ],
+        "no-console": "off",
         "@typescript-eslint/no-unused-vars": "warn",
         "@typescript-eslint/no-unsafe-call": "off",
         "@typescript-eslint/no-unsafe-return": "off",
@@ -78,7 +80,9 @@
         "@typescript-eslint/no-unsafe-member-access": "off",
         "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/no-redundant-type-constituents": "off",
-        "no-console": "off",
+        "@typescript-eslint/strict-boolean-expressions": "off",
+        "@typescript-eslint/prefer-nullish-coalescing": "off",
+        // "@typescript-eslint/explicit-function-return-type": "off",
         "prettier/prettier": [
             "warn",
             {

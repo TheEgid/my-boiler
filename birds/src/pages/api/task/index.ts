@@ -1,7 +1,7 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { type NextApiRequest, type NextApiResponse } from "next";
 import prisma from "src/database-connector";
 
-const getHandler = async (req: NextApiRequest, res: NextApiResponse) => {
+const getHandler = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
     try {
         const tasks = await prisma.task.findMany({ orderBy: [{ id: "asc" }] });
         res.json(tasks);
@@ -10,7 +10,7 @@ const getHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 };
 
-const postHandler = async (req: NextApiRequest, res: NextApiResponse) => {
+const postHandler = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
     const transmitParams = { ...req.body };
     try {
         const tasks = await prisma.task.create({ data: { ...transmitParams, completed: false } });
@@ -22,7 +22,7 @@ const postHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 
 // POST /api/task
 // GET /api/task
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
     if (req.method === "GET") {
         await getHandler(req, res);
     } else if (req.method === "POST") {

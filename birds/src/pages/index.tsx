@@ -7,14 +7,14 @@ import { $tasks, addTaskFx, fetchTasks } from "src/model/store";
 
 import "react-toastify/dist/ReactToastify.css"; // import first
 
-export default function Home() {
+export default function Home(): JSX.Element {
     const tasks = useUnit($tasks);
 
     useEffect(() => {
         void fetchTasks();
     }, []);
 
-    const handleAddTask = async (title: string) => {
+    const handleAddTask = async (title: string): Promise<void> => {
         await addTaskFx({ title });
         void fetchTasks();
     };
@@ -54,7 +54,7 @@ export default function Home() {
                     <input
                         type="text"
                         placeholder="New Task"
-                        onKeyDown={(e) => e.key === "Enter" && handleAddTask(e.currentTarget.value)}
+                        onKeyDown={async (e) => e.key === "Enter" && handleAddTask(e.currentTarget.value)}
                     />
                 </div>
             </Container>
