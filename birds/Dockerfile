@@ -14,7 +14,7 @@ RUN pnpm install --frozen-lockfile
 
 COPY ./ ./
 
-EXPOSE 3006
+EXPOSE 3007
 
 ENV NODE_ENV production
 
@@ -22,7 +22,7 @@ ENV NEXT_TELEMETRY_DISABLED 1
 
 ENV NODE_TLS_REJECT_UNAUTHORIZED=0
 
-RUN pnpm prisma generate --schema=./prisma/postgres.prisma
+RUN pnpm prisma_gen_prod
 
 RUN pnpm build
 

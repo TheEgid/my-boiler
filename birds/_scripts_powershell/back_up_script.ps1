@@ -16,14 +16,6 @@ If (Test-Path $backupFile) {
 
 $env:PGPASSWORD = $envVars.NEXT_PUBLIC_DB_PASSWORD_DEV
 
-# //     $command = "sqlite3 $databasePath .dump > $backupFile"
-# //     Invoke-Expression $command
-
-# //     Write-Host "SQLite backup completed successfully: $backupFile"
-
-# & pg_dump --data-only -E UTF8 -f $backupFile --username $envVars.NEXT_PUBLIC_DB_USER_DEV --dbname $envVars.NEXT_PUBLIC_DB_NAME_DEV
-
-# & pg_dump -E Unicode -f $backupFile --username $envVars.NEXT_PUBLIC_DB_USER_DEV --dbname $envVars.NEXT_PUBLIC_DB_NAME_DEV
 
 if (Test-Path $backupFile) {
     Write-Output "Backup created successfully."
