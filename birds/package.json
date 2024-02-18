@@ -16,7 +16,6 @@
         "prisma_gen_dev": "pnpm prisma generate --schema=./prisma/sqlite.prisma",
         "prisma_push_dev": "pnpm prisma db push --schema=./prisma/sqlite.prisma",
         "prisma_studio_dev": "pnpm prisma studio --schema=./prisma/sqlite.prisma",
-        "backup_dev": "cd ./technical/&&tsc createSQLiteBackup.ts&&node createSQLiteBackup.js",
         "prisma_gen_prod": "pnpm prisma generate --schema=./prisma/postgres.prisma"
     },
     "dependencies": {
@@ -39,8 +38,7 @@
         "react-toastify": "^10.0.4",
         "sass": "^1.71.0",
         "sass-loader": "^14.1.0",
-        "sqlite3": "^5.1.7",
-        "ts-node": "^10.9.2"
+        "sqlite3": "^5.1.7"
     },
     "devDependencies": {
         "@types/node": "20.11.19",

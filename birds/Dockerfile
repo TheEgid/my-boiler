@@ -2,7 +2,7 @@ FROM node:current-bookworm-slim
 
 RUN apt-get update && apt-get install -y curl openssl
 
-RUN apt-get install -y --no-install-recommends libreoffice-writer libreoffice-gtk3
+RUN apt-get install -y --no-install-recommends pgloader
 
 WORKDIR /app
 

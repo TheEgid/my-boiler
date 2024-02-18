@@ -7,7 +7,7 @@ datasource db {
     url      = env("DATABASE_URL_PROD")
 }
 
-model Task {
+model task {
     id        Int     @id @default(autoincrement())
     title     String
     completed Boolean

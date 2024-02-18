@@ -1,9 +1,10 @@
 include ./birds/.env
 export
 
-LOCAL_DUMP_PATH=./birds/_BACKUP/database_dump.sql
+# LOCAL_DUMP_PATH=./birds/_BACKUP/database_dump.sql
 
-all: run restore # test clean run
+all: run restore clean run #test clean run
+
 
 run:
 	@docker-compose build
@@ -24,24 +25,21 @@ stop:
 
 
 restore:
-	@cat $(LOCAL_DUMP_PATH) | docker exec -i postgres_container psql -U $(NEXT_PUBLIC_DB_USER_DEV) -d $(NEXT_PUBLIC_DB_NAME_DEV) < $(LOCAL_DUMP_PATH)
-	@echo "Restored All! `date +%F--%H-%M`"
-
-
-# restore_data:
-# 	@cat $(LOCAL_DUMP_PATH) | docker exec -i postgres_container psql --data-only -U $(NEXT_PUBLIC_DB_USER_DEV) -d $(NEXT_PUBLIC_DB_NAME_DEV) < $(LOCAL_DUMP_PATH)
-# 	@echo "Restored Data! `date +%F--%H-%M`"
-
+	@docker exec -i application1 sh -c 'echo "load database from sqlite://sql-lite-database.db" \
+	"into postgresql://${NEXT_PUBLIC_DB_USER}:${NEXT_PUBLIC_DB_PASSWORD}@pgcontainer:5432/${NEXT_PUBLIC_DB_NAME}" \
+	"with include drop, create tables, create indexes, reset sequences, concurrency = 1, workers=2" \
+	"set work_mem to '\''16MB'\'', maintenance_work_mem to '\''512 MB'\'';" > prisma/migration.load'
+	@docker exec -i application1 pgloader prisma/migration.load
 
 # backup:
 # 	@rsync -r /opt/calc-iul-main/fullstack/prisma/database.db /opt/backedupp/
 
-# @docker exec -i postgres_container pg_dump --column-inserts --username $(NEXT_PUBLIC_DB_USER_DEV) $(NEXT_PUBLIC_DB_NAME_DEV) > $(LOCAL_DUMP_PATH)
+# @docker exec -i pgcontainer pg_dump --column-inserts --username $(NEXT_PUBLIC_DB_USER) $(NEXT_PUBLIC_DB_NAME) > $(LOCAL_DUMP_PATH)
 # @echo "Backed up All! `date +%F--%H-%M`"
 
 
 # backup_data:
-# 	@docker exec -i postgres_container pg_dump --data-only --column-inserts --username $(NEXT_PUBLIC_DB_USER_DEV) $(NEXT_PUBLIC_DB_NAME_DEV) > $(LOCAL_DUMP_PATH)
+# 	@docker exec -i pgcontainer pg_dump --data-only --column-inserts --username $(NEXT_PUBLIC_DB_USER) $(NEXT_PUBLIC_DB_NAME) > $(LOCAL_DUMP_PATH)
 # 	@echo "Backed up Data! `date +%F--%H-%M`
 
 

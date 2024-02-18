@@ -8,6 +8,6 @@ RUN sed -i 's/\r$//' /docker-entrypoint.sh
 
 ENV TZ 'Europe/Moscow'
 
-ENTRYPOINT ["/docker-entrypoint.sh"]
+ENTRYPOINT ["docker-entrypoint.sh"]
 
 CMD ["postgres"]

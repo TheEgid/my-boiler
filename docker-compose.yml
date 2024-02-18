@@ -46,22 +46,22 @@ services:
     build:
       context: birds/postgres-db
       dockerfile: Dockerfile
-    container_name: postgres_container
+    container_name: pgcontainer
     volumes:
       - database_volume:/var/lib/postgresql/data
     ports:
       - "127.0.0.1:5432:5432"
     environment:
       TZ: "Europe/Moscow"
-      POSTGRES_DB: "${NEXT_PUBLIC_DB_NAME_DEV}"
-      POSTGRES_USER: "${NEXT_PUBLIC_DB_USER_DEV}"
-      POSTGRES_PASSWORD: "${NEXT_PUBLIC_DB_PASSWORD_DEV}"
+      POSTGRES_DB: "${NEXT_PUBLIC_DB_NAME}"
+      POSTGRES_USER: "${NEXT_PUBLIC_DB_USER}"
+      POSTGRES_PASSWORD: "${NEXT_PUBLIC_DB_PASSWORD}"
       PGDATA: "/var/lib/postgresql/data/pgdata"
     healthcheck:
       test:
         [
           "CMD-SHELL",
-          "pg_isready -U ${NEXT_PUBLIC_DB_USER_DEV} -d ${NEXT_PUBLIC_DB_NAME_DEV}",
+          "pg_isready -U ${NEXT_PUBLIC_DB_USER} -d ${NEXT_PUBLIC_DB_NAME}",
         ]
       interval: 5s
       timeout: 3s
@@ -94,8 +94,6 @@ services:
 
 volumes:
   database_volume:
-
-
 # sqlite:
 #   container_name: sqllite_container
 #   image: alpine:latest
