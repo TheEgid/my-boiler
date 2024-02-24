@@ -1,7 +1,8 @@
 include ./birds/.env
 export
 
-LOCAL_DUMP_PATH=./birds/_BACKUP/database_dump.sql
+CUR_DIR := $(shell pwd)
+LOCAL_DUMP_PATH=/birds/_BACKUP
 
 all: run restore clean run #test clean run
 
@@ -33,14 +34,16 @@ restore:
 
 
 backup:
-	@docker exec -i pgcontainer pg_dump --username $(NEXT_PUBLIC_DB_USER) $(NEXT_PUBLIC_DB_NAME) > ./birds/_BACKUP/database.dump
+	@docker exec -i pgcontainer pg_dump --username $(NEXT_PUBLIC_DB_USER) $(NEXT_PUBLIC_DB_NAME) > .$(LOCAL_DUMP_PATH)/database.dump
 	@echo "Backed up All! `date +%F--%H-%M`"
 
 
-convertdb:
-	@sed 's/public\.//' -i /opt/my-boiler/birds/_BACKUP/database.dump
-	@docker run -v /opt/my-boiler/birds/_BACKUP:/dbdata -e psource='/dbdata/database.dump' -e starget='/dbdata/output.sqlite' -it glennpromise/pg2sqlite:1.0.1
-	@echo "Converted! `date +%F--%H-%M`"
+convertedbkp:
+	@docker exec -i pgcontainer pg_dump --username $(NEXT_PUBLIC_DB_USER) $(NEXT_PUBLIC_DB_NAME) > .$(LOCAL_DUMP_PATH)/database.dump
+	@sed 's/public\.//' -i .$(LOCAL_DUMP_PATH)/database.dump
+	@[ -e "$(CUR_DIR)/$(LOCAL_DUMP_PATH)/output.sqlite" ] && rm "$(CUR_DIR)/$(LOCAL_DUMP_PATH)/output.sqlite" && echo "File deleted" || echo "Nothing to delete"
+	@docker run --rm -v $(CUR_DIR)/$(LOCAL_DUMP_PATH):/dbdata -e psource='/dbdata/database.dump' -e starget='/dbdata/output.sqlite' -i glennpromise/pg2sqlite:1.0.1
+	@echo "Backed up & converted! `date +%F--%H-%M`"
 
 
 clean:
