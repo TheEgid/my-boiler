@@ -9,7 +9,7 @@ services:
     ports:
       - "127.0.0.1:3008:3008"
     # depends_on:
-    #   - sqlite
+    #   - postgres
     restart: on-failure
     environment:
       TZ: "Europe/Moscow"
@@ -19,9 +19,6 @@ services:
     #   timeout: 3s
     #   retries: 2
     #   start_period: 5s
-    # volumes:
-    #   - ./animals/prisma:/app/prisma
-    #   - ./../database:/app/data/database.db
 
   birds:
     build:
@@ -68,6 +65,16 @@ services:
       retries: 2
       start_period: 5s
 
+
+  dbconverter:
+    image: glennpromise/pg2sqlite:1.0.1
+    container_name: dbconvcontainer
+    depends_on:
+      - postgres
+    volumes:
+      - ./birds/_BACKUP:/opt
+
+
   # reverse proxy
   nginx:
     image: nginx:alpine
@@ -85,6 +92,7 @@ services:
       - birds
       - animals
       - postgres
+      - dbconverter
     healthcheck:
       test: ["CMD", "curl", "--silent", "--fail", "http://localhost:80/health"]
       interval: 5s
@@ -92,13 +100,6 @@ services:
       retries: 2
       start_period: 5s
 
+
 volumes:
   database_volume:
-# sqlite:
-#   container_name: sqllite_container
-#   image: alpine:latest
-#   build:
-#     context: sqlite
-#     dockerfile: Dockerfile
-#   volumes:
-#     - ./../database.db:/app/data/database.db

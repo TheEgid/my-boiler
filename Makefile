@@ -1,7 +1,7 @@
 include ./birds/.env
 export
 
-# LOCAL_DUMP_PATH=./birds/_BACKUP/database_dump.sql
+LOCAL_DUMP_PATH=./birds/_BACKUP/database_dump.sql
 
 all: run restore clean run #test clean run
 
@@ -31,16 +31,16 @@ restore:
 	"set work_mem to '\''16MB'\'', maintenance_work_mem to '\''512 MB'\'';" > prisma/migration.load'
 	@docker exec -i application1 pgloader prisma/migration.load
 
-# backup:
-# 	@rsync -r /opt/calc-iul-main/fullstack/prisma/database.db /opt/backedupp/
 
-# @docker exec -i pgcontainer pg_dump --column-inserts --username $(NEXT_PUBLIC_DB_USER) $(NEXT_PUBLIC_DB_NAME) > $(LOCAL_DUMP_PATH)
-# @echo "Backed up All! `date +%F--%H-%M`"
+backup:
+	@docker exec -i pgcontainer pg_dump --username $(NEXT_PUBLIC_DB_USER) $(NEXT_PUBLIC_DB_NAME) > ./birds/_BACKUP/database.dump
+	@echo "Backed up All! `date +%F--%H-%M`"
 
 
-# backup_data:
-# 	@docker exec -i pgcontainer pg_dump --data-only --column-inserts --username $(NEXT_PUBLIC_DB_USER) $(NEXT_PUBLIC_DB_NAME) > $(LOCAL_DUMP_PATH)
-# 	@echo "Backed up Data! `date +%F--%H-%M`
+convertdb:
+	@sed 's/public\.//' -i /opt/my-boiler/birds/_BACKUP/database.dump
+	@docker run -v /opt/my-boiler/birds/_BACKUP:/dbdata -e psource='/dbdata/database.dump' -e starget='/dbdata/output.sqlite' -it glennpromise/pg2sqlite:1.0.1
+	@echo "Converted! `date +%F--%H-%M`"
 
 
 clean:

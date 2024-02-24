@@ -8,7 +8,8 @@ const databaseHost = "pgcontainer";
 
 // process.env.DATABASE_URL_PROD = `postgresql://${userDb}:${passwordDb}@${databaseHost}:5432/${nameDb}`;
 
-const dbUrl = process.platform === "win32" ? process.env.DATABASE_URL_DEV : `postgresql://${userDb}:${passwordDb}@${databaseHost}:5432/${nameDb}`;
+const dbUrl =
+    process.platform === "win32" ? process.env.DATABASE_URL_DEV : `postgresql://${userDb}:${passwordDb}@${databaseHost}:5432/${nameDb}`;
 
 const prismaClientSingleton = (): PrismaClient =>
     new PrismaClient({
