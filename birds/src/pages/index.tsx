@@ -3,9 +3,8 @@ import { useUnit } from "effector-react";
 import Head from "next/head";
 import { Container } from "react-bootstrap";
 import { ToastContainer } from "react-toastify";
+import MapComponent from "src/mapOl";
 import { $tasks, addTaskFx, fetchTasks } from "src/model/store";
-
-import "react-toastify/dist/ReactToastify.css"; // import first
 
 export default function Home(): JSX.Element {
     const tasks = useUnit($tasks);
@@ -40,6 +39,8 @@ export default function Home(): JSX.Element {
                 <div className="hello">
                     <div className="chil">Привет от птиц</div>
                 </div>
+                <MapComponent mcoordinates={[37.56736034551953, 55.64960384473913]} />
+                {/* <div ref={mapRef} style={{ width: "100%", height: "400px" }} /> */}
                 <div>
                     <h1>Task List</h1>
                     <ul>

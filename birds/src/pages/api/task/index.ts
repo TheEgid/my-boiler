@@ -2,6 +2,12 @@ import { type NextApiRequest, type NextApiResponse } from "next";
 import prisma from "src/database-connector";
 
 const getHandler = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
+    const clearString = (inputString: string): string =>
+        inputString
+            .replace(/[^a-zA-Zа-яА-Я0-9 ]+/g, " ")
+            .replace(/\s+/g, " ")
+            .trim();
+
     try {
         const tasks = await prisma.task.findMany({ orderBy: [{ id: "asc" }] });
         res.json(tasks);
