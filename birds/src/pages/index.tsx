@@ -39,8 +39,7 @@ export default function Home(): JSX.Element {
                 <div className="hello">
                     <div className="chil">Привет от птиц</div>
                 </div>
-                <MapComponent mcoordinates={[37.56736034551953, 55.64960384473913]} />
-                {/* <div ref={mapRef} style={{ width: "100%", height: "400px" }} /> */}
+                <MapComponent startCoordinates={[37.5673, 55.649]} />
                 <div>
                     <h1>Task List</h1>
                     <ul>
